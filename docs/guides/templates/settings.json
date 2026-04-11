@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "_comment": "放到 <workspace>/.claude/settings.json。hook 脚本路径相对于工作区根目录。",
+
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./.claude/hooks/guard-facade.sh"
+          },
+          {
+            "type": "command",
+            "command": "./.claude/hooks/guard-sit-db.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./.claude/hooks/guard-bash.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./.claude/hooks/format-and-lint.sh"
+          }
+        ]
+      }
+    ]
+  },
+
+  "permissions": {
+    "allow": [
+      "Read(**/*)",
+      "Grep(**/*)",
+      "Glob(**/*)",
+      "Bash(mvn test:*)",
+      "Bash(mvn spotless:apply)",
+      "Bash(pnpm test:*)",
+      "Bash(pnpm lint:*)",
+      "Bash(git status)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)"
+    ],
+    "deny": [
+      "Bash(mvn deploy:*)",
+      "Bash(git push:*)",
+      "Bash(kubectl:*)",
+      "Bash(helm:*)",
+      "Bash(rm -rf /)",
+      "Bash(mysql*sit*)"
+    ]
+  }
+}
