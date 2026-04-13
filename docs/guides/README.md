@@ -39,6 +39,8 @@
 - 深度用户的典型一天
 
 ### 3. [企业级作战手册（Java + Dubbo + Vue3）](./03-enterprise-playbook.md)
+### 4. [多 Agent 模式速查](./04-multi-agent-modes.md)
+内置 Sub-Agent vs tmux 多面板 vs Background Worktree：什么时候用哪种、子 agent 做了什么怎么看。
 针对"多 repo + Dubbo 微服务 + Vue3 前后端分离"的典型企业场景，**目标是让 1 人 + Claude Code ≈ 2 人**。
 
 **核心内容**：
